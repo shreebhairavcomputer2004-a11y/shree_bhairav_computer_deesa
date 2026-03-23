@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree Bhairav computer Classes</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins;
+background:linear-gradient(135deg,#0f172a,#1e1b4b,#0f172a);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* HEADER */
+.header{
+text-align:center;
+padding:25px;
+font-size:34px;
+font-weight:700;
+background:linear-gradient(45deg,#38bdf8,#a855f7,#22c55e);
+-webkit-background-clip:text;
+color:transparent;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #38bdf8;}
+to{text-shadow:0 0 25px #a855f7;}
+}
+
+/* LOGIN BOX */
+.box{
+background:rgba(255,255,255,0.06);
+padding:25px;
+margin:20px;
+border-radius:18px;
+text-align:center;
+backdrop-filter:blur(12px);
+box-shadow:0 0 20px rgba(56,189,248,0.2);
+animation:fadeUp 1s ease;
+}
+
+input{
+padding:10px;
+margin:8px;
+border:none;
+border-radius:6px;
+width:220px;
+outline:none;
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+input::placeholder{
+color:rgba(255,255,255,0.7);
+}
+
+button{
+padding:10px 20px;
+border:none;
+background:linear-gradient(45deg,#38bdf8,#a855f7);
+color:white;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+font-weight:600;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 15px #38bdf8;
+}
+
+/* SECTIONS */
+.section{
+padding:45px 20px;
+text-align:center;
+animation:fadeUp 1s ease;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+max-width:1200px;
+margin:0 auto;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:20px;
+width:280px;
+border-radius:15px;
+transition:0.3s;
+box-shadow:0 0 10px rgba(168,85,247,0.2);
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:3px;
+background:linear-gradient(90deg,#38bdf8,#a855f7);
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 0 25px #38bdf8;
+}
+
+.card iframe{
+border-radius:8px;
+}
+
+/* LOADING */
+#loading{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-size:22px;
+background:rgba(0,0,0,0.8);
+}
+
+.spinner{
+width:55px;
+height:55px;
+border:5px solid rgba(255,255,255,0.2);
+border-top:5px solid #38bdf8;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(25px);}
+to{opacity:1;}
+}
+
+/* FLOAT EFFECT */
+.float{
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+}
+
+/* HIDE */
+.hidden{display:none;}
+
+/* EXAM MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+z-index:1000;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+max-width:500px;
+width:90%;
+backdrop-filter:blur(15px);
+text-align:center;
+animation:fadeUp 0.5s ease;
+max-height:90vh;
+overflow-y:auto;
+}
+
+.question{
+font-size:18px;
+margin:20px 0;
+line-height:1.6;
+}
+
+.options button{
+display:block;
+width:100%;
+margin:10px 0;
+padding:12px;
+background:linear-gradient(45deg,#38bdf8,#a855f7);
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.options button:hover{
+background:linear-gradient(45deg,#22c55e,#a855f7);
+transform:scale(1.02);
+}
+
+.score{
+font-size:28px;
+font-weight:700;
+color:#22c55e;
+margin:20px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+.header{font-size:24px;}
+input{width:90%;}
+.card{width:100%;max-width:350px;}
+.modal-content{padding:20px;}
+.question{font-size:16px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header float">💻 Bhairav Computer Classes</div>
+
+<!-- LOGIN -->
+<div id="login" class="box">
+<h3>Student Registration</h3>
+<p style="font-size:14px;opacity:0.8;">Enter your details to access premium courses & exams</p>
+
+<input id="name" placeholder="Full Name"><br>
+<input id="city" placeholder="City / Village"><br>
+<input id="study" placeholder="Study (Ex: 12th, Graduate)"><br>
+<input id="mobile" placeholder="Mobile Number (10 digits)"><br>
+
+<button onclick="verify()">Confirm & Login</button>
+</div>
+
+<!-- LOADING -->
+<div id="loading">
+<div class="spinner"></div>
+<p>Loading Your Learning Dashboard...</p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+
+<div class="section">
+<h2>📚 Our Premium Courses</h2>
+<p style="opacity:0.8;">Choose your learning path</p>
+
+<div class="cards">
+<div class="card">
+<h3>CCC Course</h3>
+<p>Basic Computer + Government Exam Preparation</p>
+</div>
+
+<div class="card">
+<h3>Tally Prime</h3>
+<p>Accounting + GST + Business Management</p>
+</div>
+
+<div class="card">
+<h3>Graphic Designing</h3>
+<p>Logo Design + Photoshop + Creativity Skills</p>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>🎬 GuideBase Learning Videos</h2>
+<p style="opacity:0.8;">Watch expert tutorials anytime</p>
+
+<div class="cards">
+<div class="card">
+<h3>CCC Class</h3>
+<iframe width="100%" height="180" src="https://www.youtube.com/embed/VcqvXjBbCBE" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<h3>Tally Class</h3>
+<iframe width="100%" height="180" src="https://www.youtube.com/embed/hkS0IeBkpQc" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div class="card">
+<h3>Graphic Design</h3>
+<iframe width="100%" height="180" src="https://www.youtube.com/embed/e_dv7GBHka8" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>🎮 Learning Challenges</h2>
+<p style="opacity:0.8;">Test your skills daily</p>
+
+<div class="cards">
+<div class="card">
+<h3>CCC Challenge</h3>
+<p>Daily Quiz + Exam Practice Mode</p>
+</div>
+
+<div class="card">
+<h3>Tally Challenge</h3>
+<p>Accounting + GST Problem Solving</p>
+</div>
+
+<div class="card">
+<h3>Design Challenge</h3>
+<p>Logo + Poster Creative Tasks</p>
+</div>
+</div>
+</div>
+
+<!-- EXAM SECTION -->
+<div class="section">
+<h2>🧠 Basic Exam Questions</h2>
+<p style="opacity:0.8;">Practice real exam questions - 100 Questions Test</p>
+
+<div class="cards">
+<div class="card">
+<h3>CCC Exam</h3>
+<p>Computer Fundamentals + Practice Test</p>
+<button onclick="startExam('ccc')">🚀 Start CCC Exam</button>
+</div>
+
+<div class="card">
+<h3>TALLY Exam</h3>
+<p>Accounting + GST + Tally Questions</p>
+<button onclick="startExam('tally')">🚀 Start Tally Exam</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- EXAM MODAL -->
+<div id="examModal" class="modal">
+<div class="modal-content">
+<div id="questionContainer"></div>
+<button onclick="closeExam()" style="background:#ef4444;margin-top:20px;padding:12px 24px;font-size:16px;">❌ Close Exam</button>
+</div>
+</div>
+
+<script>
+let currentExam = [];
+let currentQuestion = 0;
+let score = 0;
+
+const exams = {
+  ccc: [
+    {q: "What does CCC stand for?", options: ["Course on Computer Concepts", "Computer Certification Course", "Creative Computer Class", "Complete Computer Course"], ans: 0},
+    {q: "Which key is used to refresh?", options: ["F5", "F1", "F2", "F3"], ans: 0},
+    {q: "What is the brain of computer?", options: ["CPU", "RAM", "Hard Disk", "Monitor"], ans: 0},
+    {q: "Full form of WWW?", options: ["World Wide Web", "World Web Wide", "Wide World Web", "Web World Wide"], ans: 0},
+    {q: "Smallest unit of memory?", options: ["Bit", "Byte", "Kilobyte", "Megabyte"], ans: 0}
+  ],
+  tally: [
+    {q: "What does Tally stand for?", options: ["Transactions Allowed in a Linear Manner", "Total Accounting Ledger", "Tally Accounting Software", "Transaction Analysis Ledger"], ans: 0},
+    {q: "Tally is used for?", options: ["Accounting", "Graphic Design", "Web Development", "Video Editing"], ans: 0},
+    {q: "What is GST?", options: ["Goods and Services Tax", "General Sales Tax", "Goods Service Tax", "General Service Tax"], ans: 0},
+    {q: "Default company in Tally?", options: ["Create Company", "New Company", "Default Company", "Main Company"], ans: 0},
+    {q: "Tally shortcut for voucher entry?", options: ["F8", "F10", "F12", "Alt+F3"], ans: 0}
+  ]
+};
+
+function verify(){
+    let name=document.getElementById("name").value.trim();
+    let city=document.getElementById("city").value.trim();
+    let study=document.getElementById("study").value.trim();
+    let mobile=document.getElementById("mobile").value.trim();
+
+    if(name && city && study && mobile.length==10 && /^\d{10}$/.test(mobile)){
+        localStorage.setItem('student', JSON.stringify({name, city, study, mobile}));
+        
+        document.getElementById("login").style.display="none";
+        document.getElementById("loading").style.display="flex";
+
+        setTimeout(()=>{
+            document.getElementById("loading").style.display="none";
+            document.getElementById("dashboard").classList.remove("hidden");
+            
+            let student = JSON.parse(localStorage.getItem('student') || '{}');
+            setTimeout(() => {
+                alert(`Welcome ${student.name}!\nCity: ${student.city}\nStudy: ${student.study}\n\nYour dashboard is ready! 🎉`);
+            }, 500);
+        },2500);
+    }else{
+        alert("Please fill all details correctly!\n• Name, City, Study required\n• Mobile must be exactly 10 digits\n• Only numbers allowed in mobile");
+    }
+}
+
+function startExam(type){
+    currentExam = exams[type];
+    currentQuestion = 0;
+    score = 0;
+    showQuestion();
+    document.getElementById("examModal").style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
+
+function showQuestion(){
+    if(currentQuestion >= currentExam.length){
+        showScore();
+        return;
+    }
+    
+    let q = currentExam[currentQuestion];
+    let container = document.getElementById("questionContainer");
+    container.innerHTML = `
+        <div class="question">Q${currentQuestion+1}/${currentExam.length}</div>
+        <div style="font-size:20px;font-weight:600;margin-bottom:20px;">${q.q}</div>
+        <div class="options">
+            ${q.options.map((opt, i) => 
+                `<button onclick="selectAnswer(${i})">${String.fromCharCode(65+i)}. ${opt}</button>`
+            ).join('')}
+        </div>
+        <div style="margin-top:20px;font-size:14px;opacity:0.8;">
+            Select correct answer and click Next automatically
+        </div>
+    `;
+}
+
+function selectAnswer(index){
+    if(index === currentExam[currentQuestion].ans){
+        score++;
+    }
+    
+    // Visual feedback
+    event.target.style.background = "#22c55e";
+    setTimeout(() => {
+        currentQuestion++;
+        showQuestion();
+    }, 800);
+}
+
+function showScore(){
+    let container = document.getElementById("questionContainer");
+    let percentage = Math.round((score/currentExam.length)*100);
+    let resultText = percentage >= 70 ? "Excellent! 🥇" : percentage >= 50 ? "Good! Keep Practicing 💪" : "Need More Practice 📚";
+    let resultColor = percentage >= 70 ? '#22c55e' : percentage >= 50 ? '#f59e0b' : '#ef4444';
+    
+    container.innerHTML = `
+        <div style="font-size:36px;margin-bottom:20px;">🎉 Exam Completed!</div>
+        <div class="score">Score: ${score}/${currentExam.length}</div>
+        <div style="font-size:48px;font-weight:700;color:${resultColor};margin:20px 0;">
+            ${percentage}%
+        </div>
+        <div style="font-size:24px;margin:20px 0;opacity:0.9;">${resultText}</div>
+        <button onclick="restartExam()" style="background:linear-gradient(45deg,#22c55e,#16a34a);margin:10px;">
+            🔄 Retake Exam
+        </button>
+        <button onclick="closeExam()" style="background:#ef4444;margin:10px;">
+            ❌ Close
+        </button>
+    `;
+}
+
+function restartExam(){
+    currentQuestion = 0;
+    score = 0;
+    showQuestion();
+}
+
+function closeExam(){
+    document.getElementById("examModal").style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+// Auto-focus first input
+document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('name').focus();
+    
+    // Prevent zoom on iOS
+    document.addEventListener('touchstart', function() {}, true);
+});
+</script>
+
+</body>
+</html> 
+             
